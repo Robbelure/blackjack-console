@@ -16,11 +16,11 @@ namespace BlackjackConsoleGame.Models
         {
             string rankString = Rank switch
             {
-                1 => "A", // Ess
-                11 => "J", // Knekt
-                12 => "Q", // Dame
-                13 => "K", // Konge
-                _ => Rank.ToString() // Nummerkort fra 2 til 10
+                1 => "A", // ace
+                11 => "J", // jack
+                12 => "Q", // queen
+                13 => "K", // king
+                _ => Rank.ToString() // 2-10
             };
             return $"{rankString} of {Suit}";
         }
