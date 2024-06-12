@@ -30,20 +30,19 @@ namespace BlackjackConsoleGame
         public void StartGame()
         {
             bool playAgain = true;
-            while (playAgain)
-            {
+            while (playAgain) {
                 PlayRound();
                 Console.WriteLine("Play again? (y/n)");
                 playAgain = Console.ReadLine().ToLower() == "y";
             }
         }
 
+        // plays a single round of blackjack
         private void PlayRound()
         {
             deck = new Deck();
 
-            foreach (Player player in players)
-            {
+            foreach (Player player in players) {
                 player.ResetHand();
             }
 
@@ -56,8 +55,7 @@ namespace BlackjackConsoleGame
 
         private void DealInitialCards()
         {
-            foreach (Player player in players)
-            {
+            foreach (Player player in players) {
                 player.AddCard(deck.DrawCard());
                 if (!player.IsDealer)
                 {
@@ -66,6 +64,7 @@ namespace BlackjackConsoleGame
             }
         }
 
+        // displays dealers first card
         private void DisplayDealerCard()
         {
             Console.WriteLine($"Dealer shows: {dealer.Hand[0]}");
@@ -73,25 +72,23 @@ namespace BlackjackConsoleGame
 
         private void PlayerTurns()
         {
-            foreach (Player player in players.Where(p => !p.IsDealer))
-            {
+            foreach (Player player in players.Where(p => !p.IsDealer)) {
                 player.PlayTurn(deck);
             }
         }
 
         private void DealerTurn()
         {
-            while (dealer.ComputeHandTotal() < 17)
-            {
+            while (dealer.ComputeHandTotal() < 17) {
                 dealer.AddCard(deck.DrawCard());
             }
             Console.WriteLine($"\nDealer's final hand ({dealer.ComputeHandTotal()}): {string.Join(", ", dealer.Hand)}");
         }
 
+        // compares the hands of all players with the dealers hand 
         private void CompareHands()
         {
-            foreach (Player player in players.Where(p => !p.IsDealer))
-            {
+            foreach (Player player in players.Where(p => !p.IsDealer)) {
                 player.CompareHands(dealer.Hand);
             }
         }
