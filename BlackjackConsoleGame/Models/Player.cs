@@ -24,6 +24,11 @@ namespace BlackjackConsoleGame.Models
             Hand.Add(card);
         }
 
+        public void ResetHand()
+        {
+            Hand.Clear();
+        }
+
         public int ComputeHandTotal()
         {
             return ComputeHandTotal(Hand);
