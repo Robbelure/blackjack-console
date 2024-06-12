@@ -8,18 +8,10 @@ namespace BlackjackConsoleGame.Models
 {
     public class Card
     {
-        /// <summary>
-        /// Typen eller sorten av kortet (hjerter, ruter, spar, kløver).
-        /// </summary>
         public Suit Suit { get; set; }
-
-        // Rank from 1 (Ace) - King (13)
         public int Rank { get; set; }
 
-        /// <summary>
-        /// Gir en strengrepresentasjon av kortet, e.g., "A of Hearts", "10 of Spades".
-        /// </summary>
-        /// <returns>Strengen som representerer kortet i lesbar form.</returns>
+        // string representation of cards
         public override string ToString()
         {
             string rankString = Rank switch
