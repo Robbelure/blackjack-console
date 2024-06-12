@@ -41,6 +41,12 @@ namespace BlackjackConsoleGame
         private void PlayRound()
         {
             deck = new Deck();
+
+            foreach (Player player in players)
+            {
+                player.ResetHand();
+            }
+
             DealInitialCards();
             DisplayDealerCard();
             PlayerTurns();
