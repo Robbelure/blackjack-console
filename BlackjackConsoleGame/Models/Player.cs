@@ -38,13 +38,11 @@ namespace BlackjackConsoleGame.Models
         {
             int total = 0;
             int aceCount = hand.Count(card => card.Rank == 1);
-            foreach (var card in hand)
-            {
+            foreach (var card in hand) {
                 int cardValue = card.Rank > 10 ? 10 : card.Rank;
                 total += cardValue == 1 ? 11 : cardValue;
             }
-            while (total > 21 && aceCount > 0)
-            {
+            while (total > 21 && aceCount > 0) {
                 total -= 10;
                 aceCount--;
             }
@@ -56,33 +54,29 @@ namespace BlackjackConsoleGame.Models
             int initialHandTotal = ComputeHandTotal();
             Console.WriteLine($"\n{Name}'s hand ({initialHandTotal}): {string.Join(", ", Hand)}");
 
-            if (initialHandTotal == 21)
-            {
+            if (initialHandTotal == 21) {
                 Console.WriteLine("Blackjack!!");
                 return;
             }
 
-            while (true)
-            {
+            while (true) {
                 Console.WriteLine("Hit or stand? (h/s)");
                 string choice = Console.ReadLine().ToLower();
 
                 if (choice == "s") break;
-                if (choice == "h")
-                {
+                if (choice == "h") {
                     Card card = deck.DrawCard();
-                    AddCard(card);
-                    Console.WriteLine($"\nYou hit: {card}");
+                    AddCard(card);                   
                     int handTotal = ComputeHandTotal();
+
+                    Console.WriteLine($"\nYou hit: {card}");
                     Console.WriteLine($"{Name}'s hand ({handTotal}): {string.Join(", ", Hand)}");
 
-                    if (handTotal > 21)
-                    {
+                    if (handTotal > 21) {
                         Console.WriteLine("Bust! You lose.");
                         break;
                     }
-                    if (handTotal == 21)
-                    {
+                    if (handTotal == 21) {
                         Console.WriteLine("Blackjack!!");
                         break;
                     }
@@ -94,30 +88,24 @@ namespace BlackjackConsoleGame.Models
         {
             int playerTotal = ComputeHandTotal();
             int dealerTotal = ComputeHandTotal(dealerHand);
-            if (playerTotal > 21 && dealerTotal > 21)
-            {
+            if (playerTotal > 21 && dealerTotal > 21) {
                 Console.WriteLine($"{Name} busts! Dealer busts. It's a tie.");
             }
-            else if (playerTotal > 21)
-            {
+            else if (playerTotal > 21) {
                 Console.WriteLine($"{Name} busts! Dealer wins.");
             }
             // Sjekk om dealeren har bustet
-            else if (dealerTotal > 21)
-            {
+            else if (dealerTotal > 21) {
                 Console.WriteLine($"{Name} wins! Dealer busts.");
             }
-            else if (playerTotal > dealerTotal)
-            {
+            else if (playerTotal > dealerTotal) {
                 Console.WriteLine($"{Name} wins!");
             }
             // Sjekk om dealeren har høyere håndverdi enn spilleren
-            else if (playerTotal < dealerTotal)
-            {
+            else if (playerTotal < dealerTotal) {
                 Console.WriteLine($"{Name} loses. Dealer wins.");
             }
-            else
-            {
+            else {
                 Console.WriteLine($"{Name} ties with the dealer.");
             }
         }
